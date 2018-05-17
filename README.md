@@ -49,7 +49,7 @@ Following configuration
 ``` yaml
 pipeline:
   build:
-    image: kayako/drone-packer
+    image: quay.io/heetch/drone-packer
     include_files: [ config/common.json, config/<target> ]
     target: base.json
     dry_run: false
