@@ -9,7 +9,7 @@ A [Drone][] plugin to run [packer][] builds.
 ``` yaml
 pipeline:
   build:
-    image: kayako/drone-packer
+    image: quay.io/heetch/drone-packer
     include_files: [ config/common.json, config/<target> ]
     target: base.json
     variables:
