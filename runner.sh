@@ -4,6 +4,8 @@
 ci_role=${PLUGIN_USE_CI_ROLE:-'ci'}
 session_id="${DRONE_COMMIT_SHA:0:10}-${DRONE_BUILD_NUMBER}"
 account_id=${PLUGIN_ACCOUNT:-'none'}
+aws_credentials_ttl=${PLUGIN_AWS_CREDENTIALS_TTL:-'3600'}
+aws_region=${PLUGIN_AWS_REGION:-'us-east-1'}
 
 # Functions
 function pdebug {
@@ -24,7 +26,7 @@ echo "  IAM Role Session ID: ${session_id}"
 
 # Get authentified if a role is specified
 if [ "${account_id}" != "IAM Role" ]; then
-  iam_creds=$(aws sts assume-role --role-arn "arn:aws:iam::${account_id}:role/${ci_role}" --role-session-name "drone-${session_id}" --duration-seconds "43200" --region=${PLUGIN_AWS_REGION:-'us-east-1'} | python -m json.tool)
+  iam_creds=$(aws sts assume-role --role-arn "arn:aws:iam::${account_id}:role/${ci_role}" --role-session-name "drone-${session_id}" --duration-seconds ${aws_credentials_ttl} --region ${aws_region} | python -m json.tool)
 
   if [ -z "${iam_creds}" ]; then
     echo "ERROR: Unable to assume AWS role"
