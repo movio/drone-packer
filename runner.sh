@@ -23,6 +23,7 @@ echo "AWS credentials meta:"
 echo "  CI Role: ${ci_role}"
 echo "  Account ID: ${account_id}"
 echo "  IAM Role Session ID: ${session_id}"
+echo "  IAM Credentials TTL: ${aws_credentials_ttl}"
 
 # Get authentified if a role is specified
 if [ "${account_id}" != "IAM Role" ]; then
