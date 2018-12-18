@@ -96,5 +96,5 @@ dryrun="${PLUGIN_DRY_RUN:-${dryrun}}"
 if [ "${dryrun}" == "true" ]; then
   packer validate ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}"
 else
-  packer build ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}" -on-error="${on_error}"
+  packer build -on-error="${on_error}" ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}"
 fi
