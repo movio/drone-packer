@@ -27,6 +27,7 @@ pipeline:
  - `include_files`: List of variable files to include in build
  - `except`: List of builders to skip
  - `only`: List of builders to run
+ - `on_error`: Configure the behaviour of [Packer](https://www.packer.io/docs/commands/build.html#on-error-cleanup) when build fail (default: cleanup)
  - `dry_run`: Only run a Packer validate. `true` / `false` (default: false)
 
 ## Notes
