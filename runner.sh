@@ -6,6 +6,7 @@ session_id="${DRONE_COMMIT_SHA:0:10}-${DRONE_BUILD_NUMBER}"
 account_id=${PLUGIN_ACCOUNT:-'none'}
 aws_credentials_ttl=${PLUGIN_AWS_CREDENTIALS_TTL:-'3600'}
 aws_region=${PLUGIN_AWS_REGION:-'us-east-1'}
+on_error="${PLUGIN_ON_ERROR:-'cleanup'}"
 
 # Functions
 function pdebug {
@@ -95,5 +96,5 @@ dryrun="${PLUGIN_DRY_RUN:-${dryrun}}"
 if [ "${dryrun}" == "true" ]; then
   packer validate ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}"
 else
-  packer build ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}"
+  packer build ${inclusions} ${to_skip} ${to_build} ${include_vars} "${target}" -on-error="${on_error}"
 fi
