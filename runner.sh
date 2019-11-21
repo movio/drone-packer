@@ -19,6 +19,13 @@ if [ "${account_id}" == "none" ]; then
   account_id="IAM Role"
 fi
 
+# Get the root_dir for packer files
+root_dir="${PLUGIN_ROOT_DIR:-${root_dir}}"
+if [ "${root_dir}" != "" ]; then
+  echo "Root Dir: ${root_dir}"
+  cd "${root_dir}" || exit 1
+fi
+
 # Print authentication infos
 echo "AWS credentials meta:"
 echo "  CI Role: ${ci_role}"

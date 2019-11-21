@@ -11,6 +11,7 @@ pipeline:
   build:
     image: quay.io/heetch/drone-packer
     include_files: [ config/common.json, config/<target> ]
+    root_dir: src/services/app/delivery/app-pk
     target: base.json
     variables:
         name: packer
@@ -21,6 +22,7 @@ pipeline:
 
  - `account`: AWS account ID in which to assume the role. Instance IAM role will be used by default
  - `use_ci_role`: IAM role name to use. Defaults to `ci`. Ignored if `account` is not provided
+ - `root_dir`: The root directory where the packer files live. When unset, the top level directory will be assumed.
  - `target`: Name of target packer template to execute
  - `variables`: Optional variables to pass to packer build command
  - `secret_variables`: List of variables to be read from environment
@@ -32,6 +34,7 @@ pipeline:
 
 ## Notes
 
+ - `root_dir` is a relative path to repository root.
  - `target` must be the name of the target template. `target` can be provided as plugin parameter
    in .drone.yml file or it can be passed as deployment parameter using either drone CLI or
    github deployment api.
